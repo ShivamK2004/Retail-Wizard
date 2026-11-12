@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% block content %}
+<div class="page-heading"><div><p class="eyebrow">STORE OVERVIEW</p><h1>Dashboard</h1><p class="muted">Good day, {{ user.full_name }}. Here is your store overview.</p></div><a class="btn primary" href="/pos">＋ New sale</a></div>
+<div class="metric-grid">
+  <div class="metric blue"><span>SALES TODAY</span><strong>₹{{ '%.2f'|format(metrics.sales_today) }}</strong><small>Net of recorded refunds</small></div>
+  <div class="metric teal"><span>TRANSACTIONS TODAY</span><strong>{{ metrics.transactions_today }}</strong><small>Sales recorded today</small></div>
+  <div class="metric purple"><span>ACTIVE PRODUCTS</span><strong>{{ metrics.products }}</strong><small>In the catalogue</small></div>
+  <div class="metric red"><span>LOW-STOCK ITEMS</span><strong>{{ metrics.low_stock }}</strong><small>At or below reorder point</small></div>
+</div>
+<div class="content-grid two-one">
+  <section class="panel"><div class="panel-head"><div><h2>Recent transactions</h2><p>Latest completed and refunded sales</p></div><a class="btn small" href="/sales">View all</a></div>
+    {% if recent %}<div class="table-wrap"><table><thead><tr><th>Invoice</th><th>Customer</th><th>Date / time</th><th>Net total</th><th>Payment</th><th></th></tr></thead><tbody>
+    {% for sale in recent %}<tr><td class="mono">{{ sale.invoice_no }}</td><td>{{ sale.customer_name }}</td><td>{{ sale.sold_at_local }}</td><td>₹{{ '%.2f'|format(sale.total-sale.refunded_total) }}</td><td><span class="pill">{{ sale.payment_method }}</span></td><td><a class="text-link" href="/sales/{{ sale.id }}">Details</a></td></tr>{% endfor %}
+    </tbody></table></div>{% else %}<div class="empty-state">No transactions yet. Your first sale will appear here.</div>{% endif %}
+  </section>
+  <section class="panel"><div class="panel-head"><div><h2>Stock alerts</h2><p>Products needing attention</p></div><a class="text-link" href="/products">Products</a></div>
+    {% if low_stock %}<div class="alert-list">{% for product in low_stock %}<div class="alert-row"><span class="stock-dot"></span><div><strong>{{ product.name }}</strong><small>{{ product.sku }} · Stock {{ product.stock_qty|int if product.stock_qty % 1 == 0 else product.stock_qty }} / reorder {{ product.reorder_level|int if product.reorder_level % 1 == 0 else product.reorder_level }}</small></div><span class="badge danger">Low</span></div>{% endfor %}</div>{% else %}<div class="empty-state">All products are above their reorder points.</div>{% endif %}
+  </section>
+</div>
+{% endblock %}

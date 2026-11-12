@@ -1,0 +1,9 @@
+﻿SKU,Barcode,Product Name,Category,Brand,Unit,Selling Price,Cost Price,Discount Percent,Tax Percent,Stock Qty,Reorder Level,Expiry Date
+TEST-RW-001,890000000001,Brown Bread 400g,Bakery,FreshDay,pcs,100.0,60.0,10,5,20,5,2027-01-15
+TEST-RW-002,890000000002,Mineral Water 1L,Beverages,ClearDrop,bottle,20.0,10.0,0,5,30,10,
+TEST-RW-003,890000000003,Fresh Milk 1L,Dairy,DailyFarm,packet,60.0,45.0,0,5,2,5,2026-11-25
+TEST-RW-004,890000000004,Shampoo 180ml,Personal Care,CarePlus,bottle,150.0,100.0,10,18,10,3,
+TEST-RW-005,890000000005,Bath Soap 100g,Personal Care,CleanHome,bar,50.0,30.0,0,18,25,8,
+TEST-RW-006,890000000006,Potato Chips 50g,Snacks,Crunchy,packet,30.0,18.0,0,5,0,3,
+TEST-RW-007,890000000007,A5 Notebook,Stationery,WriteWell,pcs,80.0,45.0,5,12,15,4,
+TEST-RW-008,890000000008,Blue Ball Pen,Stationery,WriteWell,pcs,10.0,4.0,0,0,100,20,

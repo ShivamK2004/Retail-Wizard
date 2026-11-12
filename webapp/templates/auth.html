@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block auth_content %}
+<div class="auth-card">
+  <div class="auth-brand"><span class="brand-mark">RW</span><div><b>RETAIL WIZARD</b><small>WEB EDITION</small></div></div>
+  {% if mode == 'setup' %}
+    <p class="eyebrow">FIRST-TIME SETUP</p><h1>Create your store administrator</h1><p class="muted">The first account becomes the administrator. Public registration closes after setup.</p>
+    <form method="post" action="/setup" class="form-stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf }}">
+      <label>One-time setup key<input required type="password" name="setup_key" autocomplete="off"></label>
+      <label>Full name<input required name="full_name" autocomplete="name"></label>
+      <label>Username<input required name="username" autocomplete="username"></label>
+      <label>Password (minimum 8 characters)<input required type="password" name="password" minlength="8" autocomplete="new-password"></label>
+      <label>Confirm password<input required type="password" name="confirm_password" minlength="8" autocomplete="new-password"></label>
+      {% if error %}<div class="alert error">{{ error }}</div>{% endif %}
+      <button class="btn primary full" type="submit">Create administrator</button>
+    </form>
+  {% else %}
+    <p class="eyebrow">WELCOME BACK</p><h1>Sign in to your store</h1><p class="muted">Manage sales, inventory, refunds and business insights.</p>
+    <form method="post" action="/login" class="form-stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf }}">
+      <label>Username<input required name="username" autocomplete="username"></label>
+      <label>Password<input required type="password" name="password" autocomplete="current-password"></label>
+      {% if error %}<div class="alert error">{{ error }}</div>{% endif %}
+      <button class="btn primary full" type="submit">Sign in</button>
+    </form>
+    <p class="auth-foot">Need a cashier account? Ask your store administrator to create it.</p>
+  {% endif %}
+</div>
+{% endblock %}

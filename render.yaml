@@ -1,0 +1,23 @@
+# FREE TEST DEPLOYMENT ONLY. No persistent disk is attached.
+# SQLite data is stored on Render's ephemeral filesystem and can be erased
+# whenever the free service spins down, restarts, or redeploys.
+services:
+  - type: web
+    name: retail-wizard-web-free
+    runtime: python
+    region: singapore
+    plan: free
+    buildCommand: pip install -r requirements-web.txt
+    startCommand: uvicorn webapp.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: INITIAL_ADMIN_SETUP_KEY
+        generateValue: true
+      - key: APP_TIMEZONE
+        value: Asia/Kolkata
+      - key: COOKIE_SECURE
+        value: 'true'
+      - key: RETAIL_WIZARD_DEMO_MODE
+        value: 'true'
